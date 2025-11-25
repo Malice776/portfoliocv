@@ -1,0 +1,73 @@
+---
+title: "QuentinOnMangeOu – Application Streamlit"
+publishedAt: "2025-11-25"
+summary: "Application Streamlit permettant de référencer des restaurants, attribuer des notes par ami et générer un choix pondéré pour décider où manger."
+images:
+  - "/images/projects/QuentinOnMangeOu/home.png"
+  - "/images/projects/QuentinOnMangeOu/graph.png"
+  - "/images/projects/QuentinOnMangeOu/choix.png"
+team:
+  - name: "Marine RAPIN"
+    role: "Développeuse / Data & Streamlit"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/marine-rapin-105095150//"
+
+category: "ia-data"
+---
+
+## Description
+
+**QuentinOnMangeOu** est une application web développée avec **Streamlit**, permettant de centraliser et noter tous les restaurants visités entre amis.  
+Chaque entrée du tableau contient :
+
+- Le nom du restaurant   
+- Une **colonne de note par ami** (ex : Quentin, Marine, etc.)  
+
+L’objectif est de faciliter le choix d’un restaurant en regroupant l’historique, les avis, les statistiques et un système de recommandation pondérée.
+
+## Objectifs
+
+- Référencer facilement tous les restaurants visités  
+- Permettre à chaque ami d’attribuer sa propre note  
+- Générer des statistiques globales :  
+  - moyennes des notes  
+  - restaurants les plus appréciés  
+  - distribution des notes  
+- Proposer un **choix pondéré** : plus un restaurant est bien noté, plus il a de chances d’être sélectionné  
+- Offrir une interface simple, rapide et accessible via Streamlit
+
+## Fonctionnalités et Techniques
+
+- **Tableau dynamique de restaurants**  
+  - Ajout / modification / suppression de restaurants  
+  - Stockage Google Sheet (API)
+  - Colonnes personnalisées pour chaque ami
+
+- **Page Statistiques**  
+  - Graphiques des notes (moyennes, histogrammes, barplots…)  
+  - Répartition des notes par ami  
+  - Classement automatique des meilleurs restaurants
+
+- **Page “Choix Pondéré”**  
+  - Calcul d’une probabilité basée sur la moyenne des notes  
+  - Sélection pseudo-aléatoire pondérée (type roulette wheel selection)  
+  - Animation/visuel du choix final
+
+
+## Compétences Démontrées
+
+- Développement d’une application web interactive avec **Streamlit**  
+- Manipulation de données tabulaires 
+- Construction de **visualisations statistiques**  
+- Implémentation d’un **système de recommandation pondéré**  
+- Conception d’une interface claire pour gérer et filtrer les restaurants  
+- Organisation simple et maintenable d’un projet multi-pages
+
+## Technologies Utilisées
+
+- **Python 3.x**  
+- **Streamlit** (UI web)  
+- **Google Sheets API** pour la sauvegarde en ligne  
+-  **Streamlit Cloud** pour le déploiement
+
+---
