@@ -48,8 +48,8 @@ const home: Home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `Portfolio qui montre mon travail`,
-  headline: <>Portfolio/CV</>,
+  description: `Portfolio de Marine Rapin`,
+  headline: <>Portfolio de Marine Rapin</>,
   featured: {
     display: true,
     title: (
@@ -97,7 +97,7 @@ const about: About = {
   description: (
     <>
       Je suis passionné par l'IA et la data.<br />
-      J'adore analyser, comprendre et exploiter les données. Mon objectif est de donner du sens aux données et de développer des Site qui font vraiment la différence.
+      J'adore analyser, comprendre et exploiter les données. Mon objectif est de donner du sens aux données et de développer des sites qui font vraiment la différence.
     </>
   ),
 
@@ -108,14 +108,14 @@ const about: About = {
     experiences: [
       {
         company: "AXA IM part of BNP",
-        timeframe: "2024 - Present",
+        timeframe: "2024 - Présent",
         role: "Alternante Data Engineer",
         achievements: [
           <>
             je travaille sur la gestion et la migration des bases de données vers de nouveaux systèmes, en assurant la qualité et la sécurité des données tout au long du processus.
           </>,
           <>
-            Je développe et automatise des scripts pour Windows en utilisant des language tels que PowerShell, STL, Batch et AWK, ce qui permet d’optimiser les flux de travail et d’améliorer l’efficacité des opérations de données.
+            Je développe et automatise des scripts pour Windows en utilisant des languages tels que PowerShell, STL, Batch et AWK, ce qui permet d’optimiser les flux de travail et d’améliorer l’efficacité des opérations de données.
           </>,
         ],
         images: [
@@ -130,7 +130,7 @@ const about: About = {
       },
       {
         company: "Mega International",
-        timeframe: "juin - aout 2023",
+        timeframe: "Juin - Août 2023",
         role: "Stagiaire Solutions Engineer",
         achievements: [
           <>
@@ -144,7 +144,7 @@ const about: About = {
       },
 
       {
-        company: "Centre de recherceh saint-Antoine",
+        company: "Centre de recherche saint-Antoine",
         timeframe: "Octobre 2023",
         role: "Stagiaire Médiatrice scientifique",
         achievements: [
@@ -155,7 +155,7 @@ const about: About = {
             Sensibilisation du grand public aux avancées scientifiques et technologiques dans le domaine de la santé à travers des activités interactives et éducatives.
           </>,
           <>
-            Accompagnement d’une classe de ST2S pour visite de découverte du centre de recherche.
+            Accompagnement d’une classe de ST2S pour une visite de découverte du centre de recherche.
           </>,
         ],
         images: [],
