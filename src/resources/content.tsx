@@ -49,7 +49,7 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio qui montre mon travail`,
-  headline: <>Mon portfolio !</>,
+  headline: <>Portfolio/CV</>,
   featured: {
     display: true,
     title: (
@@ -65,7 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-      Bienvenue dans mon portfolio : un espace où se rencontrent mes projets scolaires et mes explorations personnelles.  
+      Bienvenue dans mon portfolio !<br /> un espace où se rencontrent mes projets scolaires et mes explorations personnelles.  
       {/* <Logo
         dark
         icon="/trademarks/wordmark-dark.svg"
