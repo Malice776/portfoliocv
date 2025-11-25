@@ -315,45 +315,46 @@ const gallery: Gallery = {
   // These are placeholder images, replace with your own
   images: [
     {
-      src: "/images/gallery/horizontal-1.jpg",
+      src: "/images/gallery/accueil.png",
       alt: "image",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
+      src: "/images/gallery/ant_mosaic.mp4",
       alt: "image",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
+      src: "/images/gallery/Halfcheetah_mosaic.mp4",
       alt: "image",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/horizontal-4.jpg",
+      src: "/images/gallery/cover-01.jpg",
       alt: "image",
       orientation: "horizontal",
     },
     {
-      src: "/images/gallery/vertical-3.jpg",
+      src: "/images/gallery/cover-02.jpg",
       alt: "image",
-      orientation: "vertical",
+      orientation: "horizontal",
     },
+    {
+      src: "/images/gallery/cover-03.jpg",
+      alt: "image",
+      orientation: "horizontal",
+    },
+    {
+      src: "/images/gallery/cover-04.jpg",
+      alt: "image",
+      orientation: "horizontal",
+    },
+    {
+      src: "/images/gallery/cover-05.jpg",
+      alt: "image",
+      orientation: "horizontal",
+    },
+
   ],
 };
 
