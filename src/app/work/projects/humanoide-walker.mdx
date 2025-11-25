@@ -17,7 +17,7 @@ category: "ia-data"
 
 Ce projet consiste à entraîner un agent pour contrôler un **humanoïde bipède** dans l’environnement **Humanoid** de **Gymnasium MuJoCo**, avec comme objectif de réaliser une locomotion stable et efficace. L’agent apprend à appliquer des torques aux articulations (hanches, genoux, bras) pour se tenir debout et marcher en avant, tout en minimisant le risque de chute.
 
-L’environnement Humanoid est très complexe, car il simule un robot à 17 degrés d’action (torques) dans un espace d’observation très riche. :contentReference[oaicite:0]{index=0}  
+L’environnement Humanoid est très complexe, car il simule un robot à 17 degrés d’action (torques) dans un espace d’observation très riche. :
 
 ## Objectifs
 
@@ -29,11 +29,11 @@ L’environnement Humanoid est très complexe, car il simule un robot à 17 degr
 ## Fonctionnalités et Techniques
 
 - **Apprentissage par renforcement profond** : utilisation d’un algorithme comme PPO, SAC ou DQN adapté à l’environnement Humanoid  
-- **Contrôle des articulations** : les actions correspondent à des torques sur les articulations (17 dimensions) :contentReference[oaicite:1]{index=1}  
+- **Contrôle des articulations** : les actions correspondent à des torques sur les articulations (17 dimensions) :
 - **Replay Buffer / Target Network** : si c’est un algorithme de type Q‑learning, pour stabiliser l’apprentissage  
 - **Exploration‑exploitation** : stratégie d’epsilon-greedy (ou autre) pour explorer suffisamment tout en exploitant les stratégies apprises  
 - **Suivi des performances** : visualisation des courbes de récompense, taux de chute, distance parcourue, etc.  
-- **Simulation physique avancée** : simulation de la physique du robot via MuJoCo (Gymnasium) :contentReference[oaicite:2]{index=2}  
+- **Simulation physique avancée** : simulation de la physique du robot via MuJoCo (Gymnasium) :
 - **Visualisation du comportement** : enregistrement des épisodes de simulation (vidéos) pour analyser le mouvement de l’agent
 
 ## Compétences Démontrées
@@ -47,8 +47,8 @@ L’environnement Humanoid est très complexe, car il simule un robot à 17 degr
 ## Technologies Utilisées
 
 - **Python 3.x**  
-- **Gymnasium** avec l’environnement **Humanoid‑v4 ou v5** :contentReference[oaicite:3]{index=3}  
-- **MuJoCo** pour la simulation physique :contentReference[oaicite:4]{index=4}  
+- **Gymnasium** avec l’environnement **Humanoid‑v4 ou v5** :
+- **MuJoCo** pour la simulation physique :
 - **PyTorch** (ou TensorFlow) pour le réseau neuronal de l’agent  
 - Bibliothèques de visualisation : **Matplotlib**, **Seaborn**  
 - Outils d’entraînement RL : possibilité d’utiliser **Stable‑Baselines3**, **RLlib**, ou une implémentation custom
