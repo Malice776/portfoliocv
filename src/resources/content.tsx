@@ -1,5 +1,6 @@
 import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
 import { Line, Logo, Row, Text } from "@once-ui-system/core";
+import { Analytics } from "@vercel/analytics/next"
 
 const person: Person = {
   firstName: "Marine",
@@ -74,7 +75,7 @@ const home: Home = {
     </>
   ),
 };
-
+<Analytics />
 const about: About = {
   path: "/about",
   label: "A propos",
