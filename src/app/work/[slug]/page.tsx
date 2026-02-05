@@ -27,11 +27,12 @@ import { Projects } from "@/components/work/Projects";
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
   return posts
-    .filter((post) => post.slug) // sécurité
-    .map((post) => ({
+    .filter(post => post.slug)
+    .map(post => ({
       slug: post.slug,
     }));
 }
+
 
 // --------------------
 // Generate metadata for SEO / OG
@@ -39,7 +40,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string | string[] };
+  params: { slug: string | string[] }; // ← ici pas Promise
 }): Promise<Metadata> {
   const slugPath = Array.isArray(params.slug)
     ? params.slug.join("/")
@@ -54,12 +55,11 @@ export async function generateMetadata({
     title: post.metadata.title,
     description: post.metadata.summary,
     baseURL,
-    image:
-      post.metadata.image ||
-      `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`,
+    image: post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`,
     path: `${work.path}/${post.slug}`,
   });
 }
+
 
 // --------------------
 // Main component
