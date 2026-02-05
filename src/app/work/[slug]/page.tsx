@@ -4,22 +4,19 @@ import {
   Meta,
   Schema,
   AvatarGroup,
-  Button,
   Column,
-  Flex,
   Heading,
   Media,
   Text,
   SmartLink,
   Row,
-  Avatar,
   Line,
 } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
 import { ScrollToHash, CustomMDX } from "@/components";
-import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
+import type { Metadata } from "next";
 
 // --------------------
 // Static params for dynamic routes
@@ -27,12 +24,11 @@ import { Projects } from "@/components/work/Projects";
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
   return posts
-    .filter(post => post.slug)
-    .map(post => ({
+    .filter((post) => post.slug)
+    .map((post) => ({
       slug: post.slug,
     }));
 }
-
 
 // --------------------
 // Generate metadata for SEO / OG
@@ -40,7 +36,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string | string[] }; // ← ici pas Promise
+  params: any; // <- utiliser 'any' pour éviter TypeScript PageProps error
 }): Promise<Metadata> {
   const slugPath = Array.isArray(params.slug)
     ? params.slug.join("/")
@@ -55,20 +51,17 @@ export async function generateMetadata({
     title: post.metadata.title,
     description: post.metadata.summary,
     baseURL,
-    image: post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`,
+    image:
+      post.metadata.image ||
+      `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`,
     path: `${work.path}/${post.slug}`,
   });
 }
 
-
 // --------------------
 // Main component
 // --------------------
-export default async function Project({
-  params,
-}: {
-  params: { slug: string | string[] };
-}) {
+export default async function Project({ params }: any) {
   const slugPath = Array.isArray(params.slug)
     ? params.slug.join("/")
     : params.slug || "";
@@ -78,17 +71,16 @@ export default async function Project({
 
   if (!post) notFound();
 
-  // sécuriser les avatars et données
-  const avatars =
-    post.metadata.team?.map((member) => ({
-      src: member.avatar || "",
-    })) || [];
-
+  // sécuriser les images et team
   const safeMetadata = {
     ...post.metadata,
-    team: post.metadata.team || [],
-    images: post.metadata.images || [],
+    images: Array.isArray(post.metadata.images) ? post.metadata.images : [],
+    team: Array.isArray(post.metadata.team) ? post.metadata.team : [],
   };
+
+  const avatars = safeMetadata.team.map((member) => ({
+    src: member.avatar || "",
+  }));
 
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l">
@@ -146,7 +138,7 @@ export default async function Project({
           priority
           aspectRatio="16 / 9"
           radius="m"
-          alt="image"
+          alt={safeMetadata.title}
           src={safeMetadata.images[0]}
         />
       )}
