@@ -21,57 +21,74 @@ import { ScrollToHash, CustomMDX } from "@/components";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
+// --------------------
+// Static params for dynamic routes
+// --------------------
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return posts
+    .filter((post) => post.slug) // sécurité
+    .map((post) => ({
+      slug: post.slug,
+    }));
 }
 
+// --------------------
+// Generate metadata for SEO / OG
+// --------------------
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string | string[] }>;
+  params: { slug: string | string[] };
 }): Promise<Metadata> {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+  const slugPath = Array.isArray(params.slug)
+    ? params.slug.join("/")
+    : params.slug || "";
 
   const posts = getPosts(["src", "app", "work", "projects"]);
-  let post = posts.find((post) => post.slug === slugPath);
+  const post = posts.find((p) => p.slug === slugPath);
 
   if (!post) return {};
 
   return Meta.generate({
     title: post.metadata.title,
     description: post.metadata.summary,
-    baseURL: baseURL,
-    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
+    baseURL,
+    image:
+      post.metadata.image ||
+      `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`,
     path: `${work.path}/${post.slug}`,
   });
 }
 
+// --------------------
+// Main component
+// --------------------
 export default async function Project({
   params,
 }: {
-  params: Promise<{ slug: string | string[] }>;
+  params: { slug: string | string[] };
 }) {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
+  const slugPath = Array.isArray(params.slug)
+    ? params.slug.join("/")
+    : params.slug || "";
 
-  let post = getPosts(["src", "app", "work", "projects"]).find((post) => post.slug === slugPath);
+  const posts = getPosts(["src", "app", "work", "projects"]);
+  const post = posts.find((p) => p.slug === slugPath);
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
+  // sécuriser les avatars et données
   const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
+    post.metadata.team?.map((member) => ({
+      src: member.avatar || "",
     })) || [];
+
+  const safeMetadata = {
+    ...post.metadata,
+    team: post.metadata.team || [],
+    images: post.metadata.images || [],
+  };
 
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l">
@@ -79,12 +96,13 @@ export default async function Project({
         as="blogPosting"
         baseURL={baseURL}
         path={`${work.path}/${post.slug}`}
-        title={post.metadata.title}
-        description={post.metadata.summary}
-        datePublished={post.metadata.publishedAt}
-        dateModified={post.metadata.publishedAt}
+        title={safeMetadata.title}
+        description={safeMetadata.summary}
+        datePublished={safeMetadata.publishedAt}
+        dateModified={safeMetadata.publishedAt}
         image={
-          post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`
+          safeMetadata.image ||
+          `/api/og/generate?title=${encodeURIComponent(safeMetadata.title)}`
         }
         author={{
           name: person.name,
@@ -92,20 +110,24 @@ export default async function Project({
           image: `${baseURL}${person.avatar}`,
         }}
       />
+
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
           <Text variant="label-strong-m">Projects</Text>
         </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
-          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-        </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+        {safeMetadata.publishedAt && (
+          <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
+            {formatDate(safeMetadata.publishedAt)}
+          </Text>
+        )}
+        <Heading variant="display-strong-m">{safeMetadata.title}</Heading>
       </Column>
+
       <Row marginBottom="32" horizontal="center">
         <Row gap="16" vertical="center">
-          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
+          {avatars.length > 0 && <AvatarGroup reverse avatars={avatars} size="s" />}
           <Text variant="label-default-m" onBackground="brand-weak">
-            {post.metadata.team?.map((member, idx) => (
+            {safeMetadata.team.map((member, idx) => (
               <span key={idx}>
                 {idx > 0 && (
                   <Text as="span" onBackground="neutral-weak">
@@ -118,20 +140,22 @@ export default async function Project({
           </Text>
         </Row>
       </Row>
-      {post.metadata.images.length > 0 && (
-        <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />
+
+      {safeMetadata.images.length > 0 && (
+        <Media
+          priority
+          aspectRatio="16 / 9"
+          radius="m"
+          alt="image"
+          src={safeMetadata.images[0]}
+        />
       )}
+
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
         <CustomMDX source={post.content} />
       </Column>
+
       <Column fillWidth gap="40" horizontal="center" marginTop="40">
         <Line maxWidth="40" />
         <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
-          Related projects
-        </Heading>
-        <Projects exclude={[post.slug]} range={[2]} />
-      </Column>
-      <ScrollToHash />
-    </Column>
-  );
-}
+          Related p
